@@ -5,7 +5,7 @@ class FiveHundredPX
 
   attr_reader :access_token
 
-  def self.public_top_100(opts = {})
+  def self.photos(opts = {})
     query = { feature: 'popular', sort: 'rating', image_size: '3', rpp: 100 }.merge(opts)
 
     photos = get('/photos', query: query)
@@ -44,19 +44,17 @@ class FiveHundredPX
     )
   end
 
+  def photos(opts = {})
+    query = { feature: 'popular', sort: 'rating', image_size: '3', rpp: 100, include_states: 1 }.merge(opts)
+
+    access_token.get('/v1/photos', params: query).parsed
+  end
+
   def like(photo_id)
-    vote(photo_id, 1)
+    access_token.post("/v1/photos/#{photo_id}/vote", params: { vote: 1 })
   end
 
   def dislike(photo_id)
-    vote(photo_id, 0)
-  end
-
-  private
-  def vote(photo_id, value)
-    access_token.post(
-      "/v1/photos/#{photo_id}/vote",
-      params: { vote: value }
-    )
+    access_token.delete("/v1/photos/#{photo_id}/vote")
   end
 end
