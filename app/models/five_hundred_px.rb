@@ -3,6 +3,8 @@ class FiveHundredPX
   base_uri 'https://api.500px.com/v1'
   default_params consumer_key: Rails.application.secrets.consumer_key
 
+  attr_reader :access_token
+
   def self.public_top_100(opts = {})
     query = { feature: 'popular', sort: 'rating', image_size: '3', rpp: 100 }.merge(opts)
 
@@ -33,5 +35,12 @@ class FiveHundredPX
       .get_token(code,
         redirect_uri: Rails.application.routes.url_helpers.sessions_create_url)
       .token
+  end
+
+  def initialize(token)
+    @access_token = OAuth2::AccessToken.new(
+      self.class.oauth_consumer,
+      token
+    )
   end
 end
