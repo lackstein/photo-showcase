@@ -1,4 +1,13 @@
 <div class="container">
+  <% %w(success info warning danger).each do |alert| %>
+  <% if flash[alert.to_sym] %>
+  <div class="alert alert-<%= alert %> alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= flash[alert.to_sym] %>
+  </div>
+  <% end %>
+  <% end %>
+
   <% @top_100_photos.each_with_index do |photo, index| %>
     <% if index % 3 == 0 %><div class="row photo-container"><% end %>
         <%= render partial: 'photo', object: photo %>
