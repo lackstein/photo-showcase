@@ -17,6 +17,14 @@
         500px Photo Showcase
       </a>
     </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <% if logged_in? %>
+      <li><%= link_to 'Log Out', sessions_destroy_path, method: :delete %></li>
+      <% else %>
+      <li><%= link_to 'Log In', sessions_new_path %></li>
+      <% end %>
+    </ul>
   </div>
 </nav>
 

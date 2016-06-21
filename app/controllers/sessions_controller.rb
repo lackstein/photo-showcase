@@ -9,4 +9,11 @@ class SessionsController < ApplicationController
 
     redirect_to root_path
   end
+
+  def destroy
+    session[:oauth_token] = nil
+    flash[:info] = "You've logged out"
+
+    redirect_to root_path
+  end
 end
