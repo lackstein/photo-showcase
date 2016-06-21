@@ -11,4 +11,27 @@ class FiveHundredPX
 
     photos
   end
+
+  def self.oauth_consumer
+    OAuth2::Client.new(
+      Rails.application.secrets.consumer_key,
+      Rails.application.secrets.consumer_secret,
+      site: base_uri,
+      authorize_url: '/v1/oauth/authorize',
+      token_url: '/v1/oauth/token'
+    )
+  end
+
+  def self.oauth_login_url
+    oauth_consumer.auth_code.authorize_url(redirect_uri: Rails.application.routes.url_helpers.sessions_create_url)
+  end
+
+  def self.oauth_token_from_code(code)
+    # Exchanges the code received from 500px for a long-term access token which can be used to act on behalf of the user
+    oauth_consumer
+      .auth_code
+      .get_token(code,
+        redirect_uri: Rails.application.routes.url_helpers.sessions_create_url)
+      .token
+  end
 end
