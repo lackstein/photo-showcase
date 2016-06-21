@@ -1,0 +1,10 @@
+<div class="col-md-4 photo-container">
+  <a class="thumbnail"
+     onclick="prepareModal(this);"
+     data-title="<%= photo['name'] %>"
+     data-large-src="<%= photo['images'][2]['url'] %>">
+    <img
+      width="100%"
+      src="<%= photo['images'][0]['url'] %>" />
+  </a>
+</div>
