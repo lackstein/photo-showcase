@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'photos#index'
 
-  get 'photos/:id/like', to: 'photos#like', as: :photos_like
-  get 'photos/:id/dislike', to: 'photos#dislike', as: :photos_dislike
+  put 'photos/:id/like', to: 'photos#like', as: :photos_like
+  put 'photos/:id/dislike', to: 'photos#dislike', as: :photos_dislike
 
   get 'sessions/new'
   get 'sessions/create'

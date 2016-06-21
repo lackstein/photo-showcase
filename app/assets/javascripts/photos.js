@@ -1,5 +1,13 @@
 function toggleLiked(photo_id) {
-  $("#like-" + photo_id).toggleClass("btn-default btn-danger");
+  var like_button = $("#like-" + photo_id);
+
+  like_button.toggleClass("btn-default btn-danger");
+
+  if(like_button.attr("href").match(/dislike/)) {
+    like_button.attr("href", "/photos/" + photo_id + "/like");
+  } else {
+    like_button.attr("href", "/photos/" + photo_id + "/dislike");
+  }
 }
 
 function prepareModal(link) {

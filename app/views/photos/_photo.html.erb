@@ -9,7 +9,12 @@
     </a>
     <div class="caption text-center">
       <p>
-        <%= link_to photos_like_path(id: photo['id']), remote: true, class: 'btn btn-default', id: "like-#{photo['id']}", role: 'button' do %>
+        <%= link_to toggle_liked_path(photo['id'], photo['liked']),
+              method: :put,
+              remote: true,
+              class: "btn #{photo['liked'] ? 'btn-danger' : 'btn-default'}",
+              id: "like-#{photo['id']}",
+              role: 'button' do %>
         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
         <% end %>
       </p>
