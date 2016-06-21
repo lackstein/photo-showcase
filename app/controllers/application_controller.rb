@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  rescue_from OAuth2::Error, with: :log_out
+  #rescue_from OAuth2::Error, with: :log_out
   helper_method :current_user, :logged_in?
 
   def log_out

@@ -1,0 +1,14 @@
+$(function() {
+  var like_button = $("#like-<%= photo_id %>");
+  // Check if we've already defined a popover
+  // If so, then we don't need to add another one
+  if(!like_button.data('bs.popover')) {
+    like_button.popover({
+      trigger: "focus",
+      placement: "top",
+      content: "You have to log in to like a photo"
+    });
+    like_button.popover('show');
+  }
+
+});

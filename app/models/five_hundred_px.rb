@@ -43,4 +43,20 @@ class FiveHundredPX
       token
     )
   end
+
+  def like(photo_id)
+    vote(photo_id, 1)
+  end
+
+  def dislike(photo_id)
+    vote(photo_id, 0)
+  end
+
+  private
+  def vote(photo_id, value)
+    access_token.post(
+      "/v1/photos/#{photo_id}/vote",
+      params: { vote: value }
+    )
+  end
 end

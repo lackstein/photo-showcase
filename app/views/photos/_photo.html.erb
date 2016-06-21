@@ -1,10 +1,18 @@
 <div class="col-md-4 photo-container">
-  <a class="thumbnail"
-     onclick="prepareModal(this);"
-     data-title="<%= photo['name'] %>"
-     data-large-src="<%= photo['images'][2]['url'] %>">
-    <img
-      width="100%"
-      src="<%= photo['images'][0]['url'] %>" />
-  </a>
+  <div class="thumbnail">
+    <a href="#"
+       onclick="prepareModal(this);"
+       data-photo-id="<%= photo['id'] %>"
+       data-title="<%= photo['name'] %>"
+       data-large-src="<%= photo['images'][2]['url'] %>">
+      <img width="100%" src="<%= photo['images'][0]['url'] %>" />
+    </a>
+    <div class="caption text-center">
+      <p>
+        <%= link_to photos_like_path(id: photo['id']), remote: true, class: 'btn btn-default', id: "like-#{photo['id']}", role: 'button' do %>
+        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+        <% end %>
+      </p>
+    </div>
+  </div>
 </div>
