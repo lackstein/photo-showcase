@@ -29,6 +29,9 @@ gem 'httparty'
 # Stub HTTParty requests in tests
 gem 'webmock', group: :test
 
+# Used to log in to 500px
+gem 'oauth2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
