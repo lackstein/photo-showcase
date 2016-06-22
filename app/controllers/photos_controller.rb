@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_action :require_login, only: [:like, :dislike]
+  rescue_from OAuth2::Error, with: :handle_oauth_error
 
   def index
     @top_100_photos = get_scoped_photos(image_size: '3,440,1080')['photos']
@@ -20,6 +21,18 @@ class PhotosController < ApplicationController
     unless logged_in?
       render partial: 'log_in_like_tooltip', locals: { photo_id: params[:id] }
     end
+  end
+
+  def handle_oauth_error(exception)
+    case exception.response.status
+    when 401
+      session[:oauth_token] = nil
+      flash[:danger] = "You've been logged out"
+    else
+      flash[:danger] = "#{exception.code}"
+    end
+
+    render partial: 'alerts'
   end
 
   # If a user is logged in, we want to be able to indicate

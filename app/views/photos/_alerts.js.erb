@@ -1,0 +1,10 @@
+<% %w(success info warning danger).each do |alert| %>
+<% if flash[alert.to_sym] %>
+$("#alerts").append('\
+<div class="alert alert-<%= alert %> alert-dismissible" role="alert">\
+  <button type="button" class="close" data-dismiss="alert"\ aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+  <%= flash[alert.to_sym] %>\
+</div>\
+');
+<% end %>
+<% end %>
