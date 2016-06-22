@@ -12,4 +12,30 @@ class ActiveSupport::TestCase
 
     yield stub if block_given?
   end
+
+  def stub_like_request
+    expected_response = File.read(File.expand_path('../fixtures/photo.json', __FILE__))
+
+    stub_request(:post, 'https://api.500px.com/v1/photos/123/vote?vote=1')
+      .to_return(
+        body: expected_response,
+        headers: { 'Content-Type': 'application/json'})
+
+    yield stub if block_given?
+
+    expected_response
+  end
+
+  def stub_dislike_request
+    expected_response = File.read(File.expand_path('../fixtures/photo.json', __FILE__))
+
+    stub_request(:delete, 'https://api.500px.com/v1/photos/123/vote')
+      .to_return(
+        body: expected_response,
+        headers: { 'Content-Type': 'application/json'})
+
+    yield stub if block_given?
+
+    expected_response
+  end
 end

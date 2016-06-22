@@ -60,23 +60,13 @@ class FiveHundredPXTest < ActiveSupport::TestCase
   end
 
   test 'likes a photo' do
-    expected_response = File.read(File.expand_path('../../fixtures/photo.json', __FILE__))
-
-    stub_request(:post, 'https://api.500px.com/v1/photos/123/vote?vote=1')
-      .to_return(
-        body: expected_response,
-        headers: { 'Content-Type': 'application/json'})
+    expected_response = stub_like_request
 
     assert_equal MultiJson.load(expected_response), FiveHundredPX.new('test_access_token').like(123).parsed
   end
 
   test 'dislikes a photo' do
-    expected_response = File.read(File.expand_path('../../fixtures/photo.json', __FILE__))
-
-    stub_request(:delete, 'https://api.500px.com/v1/photos/123/vote')
-      .to_return(
-        body: expected_response,
-        headers: { 'Content-Type': 'application/json'})
+    expected_response = stub_dislike_request
 
     assert_equal MultiJson.load(expected_response), FiveHundredPX.new('test_access_token').dislike(123).parsed
   end
