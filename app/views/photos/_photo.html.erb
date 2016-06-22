@@ -9,7 +9,7 @@
     </a>
     <div class="caption text-center">
       <p>
-        <%= link_to toggle_liked_path(photo['id'], photo['liked']),
+        <%= link_to toggle_liked_path(photo['id'], photo.fetch('liked', false)),
               method: :put,
               remote: true,
               class: "btn #{photo['liked'] ? 'btn-danger' : 'btn-default'}",
