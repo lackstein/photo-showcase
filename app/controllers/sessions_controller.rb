@@ -6,7 +6,9 @@ class SessionsController < ApplicationController
   def create
     session[:oauth_token] = FiveHundredPX.oauth_token_from_code(params[:code])
     flash[:success] = "You've logged in"
-
+  rescue OAuth2::Error => exception
+    flash[:danger] = "#{exception.code}"
+  ensure
     redirect_to root_path
   end
 
