@@ -15,4 +15,26 @@ class PhotosControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:top_100_photos)
   end
+
+  test 'liking when logged out returns 401' do
+    put :like, { id: 123, format: :js }
+    assert_response 401
+  end
+
+  test 'disliking when logged out returns 401' do
+    put :dislike, { id: 123, format: :js }
+    assert_response 401
+  end
+
+  test 'liking when logged in is successful' do
+    stub_like_request
+    put :like, { id: 123, format: :js }, { oauth_token: 'test_access_token' }
+    assert_response :success
+  end
+
+  test 'disliking when logged in is successful' do
+    stub_dislike_request
+    put :dislike, { id: 123, format: :js }, { oauth_token: 'test_access_token' }
+    assert_response :success
+  end
 end
