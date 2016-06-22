@@ -6,5 +6,9 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  def stub_photos_request
+    stub = stub_request(:get, 'https://api.500px.com/v1/photos').with(query: hash_including(consumer_key: Rails.application.secrets.consumer_key))
+
+    yield stub if block_given?
+  end
 end
