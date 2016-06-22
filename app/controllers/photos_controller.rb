@@ -3,6 +3,9 @@ class PhotosController < ApplicationController
 
   def index
     @top_100_photos = get_scoped_photos(image_size: '3,440,1080')['photos']
+  rescue => e
+    @top_100_photos = []
+    flash[:danger] = e.message
   end
 
   %w(like dislike).each do |action|

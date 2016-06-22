@@ -14,4 +14,10 @@ class FiveHundredPXTest < ActiveSupport::TestCase
 
     assert_equal expected_response, FiveHundredPX.photos.parsed_response
   end
+
+  test 'raises RuntimeError if unauthenticated photos API fails' do
+    stub_photos_request { |stub| stub.to_return(status: 404) }
+
+    assert_raise(RuntimeError) { FiveHundredPX.photos }
+  end
 end
