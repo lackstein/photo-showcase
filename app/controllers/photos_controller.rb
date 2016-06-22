@@ -19,7 +19,7 @@ class PhotosController < ApplicationController
   private
   def require_login
     unless logged_in?
-      render partial: 'log_in_like_tooltip', locals: { photo_id: params[:id] }
+      render partial: 'log_in_like_tooltip', locals: { photo_id: params[:id] }, status: 401
     end
   end
 
@@ -32,7 +32,7 @@ class PhotosController < ApplicationController
       flash[:danger] = "#{exception.code}"
     end
 
-    render partial: 'alerts'
+    render partial: 'alerts', status: exception.response.status
   end
 
   # If a user is logged in, we want to be able to indicate
