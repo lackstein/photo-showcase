@@ -29,17 +29,7 @@ class FiveHundredPXTest < ActiveSupport::TestCase
   end
 
   test '.oauth_token_from_code exchanges and oauth code for an access token' do
-    stub_request(:post, 'https://api.500px.com/v1/oauth/token')
-      .with(body: {
-        client_id: Rails.application.secrets.consumer_key,
-        client_secret: Rails.application.secrets.consumer_secret,
-        code: 'test_oauth_code',
-        grant_type: 'authorization_code',
-        redirect_uri: Rails.application.routes.url_helpers.sessions_create_url })
-      .to_return(
-        status: 200,
-        body: { access_token: 'test_access_token' }.to_json,
-        headers: { 'Content-Type': 'application/json'})
+    stub_oauth_token_from_code_request(token: 'test_access_token', code: 'test_oauth_code')
 
     assert_equal 'test_access_token', FiveHundredPX.oauth_token_from_code('test_oauth_code')
   end
