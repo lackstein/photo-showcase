@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'webmock/minitest'
 
 class FiveHundredPXTest < ActiveSupport::TestCase
   test 'loads the top 100 popular photos' do
