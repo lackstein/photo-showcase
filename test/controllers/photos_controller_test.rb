@@ -17,12 +17,12 @@ class PhotosControllerTest < ActionController::TestCase
   end
 
   test 'liking when logged out returns 401' do
-    put :like, { id: 123, format: :js }
+    put :like, { id: 123, format: :js } # Logged out since no oauth_token
     assert_response 401
   end
 
   test 'disliking when logged out returns 401' do
-    put :dislike, { id: 123, format: :js }
+    put :dislike, { id: 123, format: :js } # Logged out since no oauth_token
     assert_response 401
   end
 
