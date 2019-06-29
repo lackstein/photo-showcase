@@ -1,4 +1,6 @@
 # 500px-showcase
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flackstein%2Fphoto-showcase.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Flackstein%2Fphoto-showcase?ref=badge_shield)
+
 Display the most popular photos from 500px, and allow users to log in and like them
 
 # Implementation Decisions
@@ -18,3 +20,7 @@ Each user's access_token is stored as part of their session. This app doesn't pe
 Since this is a pretty simple web app, I've only used jQuery, along with bootstrap for the layout. If there were more components and state and actions to keep track of I might have opted for a framework like React/Flux.
 
 The only state that changes is whether or not a specific photo has been liked/unliked, which is simple enough to keep track of. Liking/unliking a photo sends an AJAX request which returns javascript to update the state of the button.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flackstein%2Fphoto-showcase.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flackstein%2Fphoto-showcase?ref=badge_large)
